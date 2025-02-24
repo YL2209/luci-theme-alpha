@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->
-<html lang="en">
+<html lang="<%=luci.i18n.context.lang%>">
 		<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -17,10 +17,10 @@
 <script src="/luci-static/resources/cbi.js?v=git-22.339.35089-7af4a64"></script>
 
 
-<title>Alpha - Login</title>
+<title>Alpha - <%:Login%></title>
 </head>
 		
-<body class="lang_en  node-main-login" data-page="" style="background-image:url('/luci-static/alpha/background/login.png')">
+<body class="lang_<%=luci.i18n.context.lang%>  node-main-login" data-page="" style="background-image:url('/luci-static/alpha/background/login.png')">
 	<header>
 		<div class="fill">
 			<div class="container">
@@ -57,14 +57,14 @@
 				<div class='fieldset-body' id='login_form'>
 							<p class='field'>
 						<label for='user'>
-							<label class="cbi-value-title" for="luci_username">Username</label>
+							<label class="cbi-value-title" for="luci_username"><%:Username%></label>
 								<input type="text" name="luci_username" id="luci_username" autocomplete="username" value="root" />
 							</div></label>
 						<span id='valida' class='i i-warning'></span>
 					</p>
 							<p class='field'>
 						<label for='pass'>
-							<label class="cbi-value-title" for="luci_password">Password</label>
+							<label class="cbi-value-title" for="luci_password"><%:Password%></label>
 							<div class="cbi-value-field">
 								<input type="password" name="luci_password" id="luci_password" autocomplete="current-password"/>
 							</div></label>
@@ -72,7 +72,7 @@
 					</p>
 	
 						<label class='checkbox'>
-								Please Enter Username & Password.
+								<%:Please Enter Username & Password.%>
 						</label>
 	
 							<input type='submit' id='do_login' value='LOGIN' title='Login' />
