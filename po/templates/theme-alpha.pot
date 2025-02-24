@@ -1,0 +1,17 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Wrong Password. Try Again."
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Please Enter Username & Password."
+msgstr ""
+
+msgid "Login"
+msgstr ""
