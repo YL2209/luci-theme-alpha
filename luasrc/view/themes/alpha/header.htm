@@ -35,14 +35,11 @@
 	http.prepare_content("text/html; charset=UTF-8")
 
 	-- Retrieve theme properties
-	-- local background_color = config.color or '#2222359a'
-	-- local blur_value = tonumber(config.blur) or 20
-	-- local link_blur = string.format("blur(%dpx)", blur_value)
-
-	local background_color, blur_opacity
+	local background_color, background_opacity, background_blur
 	if fs.access('/etc/config/alpha') then
 		background_color = uci:get_first('alpha', 'theme', 'color') or '#2222359a'
-		blur_opacity = uci:get_first('alpha', 'theme', 'blur') or '0'
+		background_opacity = uci:get_first('alpha', 'theme', 'opacity') or '1'
+		background_blur = uci:get_first('alpha', 'theme', 'blur') or '5'
 	end
 
 -%>
@@ -70,7 +67,8 @@
 	<% if fs.access('/etc/config/alpha') then %>
 	:root {
 		--background-color: <%=background_color%>;
-		--blur-opacity:<%=blur_opacity%>px;
+		--background-blur:<%=background_blur%>px;
+		--background-opacity:<%=background_opacity%>;
 	}
 	<% end -%>
 </style>
