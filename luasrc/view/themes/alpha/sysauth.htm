@@ -11,12 +11,8 @@
 <meta name="msapplication-TileColor" content="#09c">
 <meta name="application-name" content="Alpha - LuCI">
 <meta name="apple-mobile-web-app-title" content="Alpha - LuCI">
-<link rel="stylesheet" href="/luci-static/alpha/style/style.css">
-<link rel="shortcut icon" href="luci-static/alpha/favicon.ico">
-<script src="/cgi-bin/luci/admin/translations/en?v=git-22.339.35089-7af4a64"></script>
-<script src="/luci-static/resources/cbi.js?v=git-22.339.35089-7af4a64"></script>
-
-
+<link rel="stylesheet" href="<%=media%>/style/style.css">
+<link rel="shortcut icon" href="<%=media%>/favicon.ico">
 <title>Alpha - <%:Login%></title>
 </head>
 		
@@ -32,10 +28,6 @@
 		</div>
 	</header>
 
-	<script type="text/javascript" src="/luci-static/resources/luci.js?v=git-22.361.69894-438c598"></script>
-	<script type="text/javascript">
-			L = new LuCI({"apply_rollback":90,"resource":"\/luci-static\/resources","media":"\/luci-static\/material","documentroot":"\/www","pollinterval":5,"apply_display":1.5,"requestpath":[],"ubuspath":"\/ubus\/","scriptname":"\/cgi-bin\/luci","dispatchpath":[],"apply_timeout":5,"apply_holdoff":4,"nodespec":{"satisfied":true,"action":{"type":"template","path":"admin_status\/index"},"order":1,"depends":{"acl":["luci-mod-status-index"]},"title":"Overview"}});
-	</script>
 	<form class="form-login" method="post" action="<%=pcdata(luci.http.getenv("REQUEST_URI"))%>">
 		<div class="cbi-map"></div>
 		<div class='box'>
@@ -55,7 +47,6 @@
 								<label class="cbi-value-title" for="luci_username"><%:Username%></label>
 							</label>							
 						</p>
-						<span id='valida' class='i i-warning'></span>					
 						<div class="cbi-value-field">
 							<input type="text" name="luci_username" id="luci_username" autocomplete="username" value="root" />
 						</div>
@@ -63,8 +54,7 @@
 							<label for='pass'>
 								<label class="cbi-value-title" for="luci_password"><%:Password%></label>
 							</label>							
-						</p>
-						<span id='valida' class='i i-close'></span>					
+						</p>			
 						<div class="cbi-value-field">
 							<input type="password" name="luci_password" id="luci_password" autocomplete="current-password"/>
 						</div>
