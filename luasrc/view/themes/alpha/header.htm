@@ -24,6 +24,8 @@
 	local http = require "luci.http"
 	local disp = require "luci.dispatcher"
 	local ver  = require "luci.version"
+	local fs = require "nixio.fs"
+	local uci = require 'luci.model.uci'.cursor()
 
 	local boardinfo = util.ubus("system", "board") or { }
 
@@ -31,6 +33,18 @@
 	local path = table.concat(disp.context.path, "-")
 
 	http.prepare_content("text/html; charset=UTF-8")
+
+	-- Retrieve theme properties
+	-- local background_color = config.color or '#2222359a'
+	-- local blur_value = tonumber(config.blur) or 20
+	-- local link_blur = string.format("blur(%dpx)", blur_value)
+
+	local background_color, blur_opacity
+	if fs.access('/etc/config/alpha') then
+		background_color = uci:get_first('alpha', 'theme', 'color') or '#2222359a'
+		blur_opacity = uci:get_first('alpha', 'theme', 'blur') or '0'
+	end
+
 -%>
 <!DOCTYPE html>
 <html lang="<%=luci.i18n.context.lang%>">
@@ -52,17 +66,26 @@
 <script src="<%=url('admin/translations', luci.i18n.context.lang)%>?v=git-21.295.66888-fc702bc"></script>
 <script src="<%=resource%>/cbi.js?v=git-21.295.66888-fc702bc"></script>
 <title><%=striptags( (boardinfo.hostname or "?") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %> - LuCI</title>
-<% if css then %><style title="text/css">
-<%= css %>
+<style title="text/css">
+	<% if fs.access('/etc/config/alpha') then %>
+	:root {
+		--background-color: <%=background_color%>;
+		--blur-opacity:<%=blur_opacity%>px;
+	}
+	<% end -%>
 </style>
+<% if css then %>
+	<style title="text/css">
+		<%= css %>
+	</style>
 <% end -%>
 </head>
-<body class="lang_<%=luci.i18n.context.lang%> <% if luci.dispatcher.context.authsession then %>logged-in<% end %> <% if not (path == "") then %>node-<%= path %><% else %>node-main-login<% end %>" data-page="<%= pcdata(path) %>" style="background-image:url('/luci-static/alpha/background/dashboard.png')">
+<body class="lang_<%=luci.i18n.context.lang%> <% if luci.dispatcher.context.authsession then %>logged-in<% end %> <% if not (path == "") then %>node-<%= path %><% else %>node-main-login<% end %>" data-page="<%= pcdata(path) %>" style="background-image:url('<%=media%>/background/dashboard.png')">
 <header>
 	<div class="fill">
 		<div class="container">
 		<a id="logo" href="<% if luci.dispatcher.context.authsession then %><%=url('admin/status/overview')%><% else %>#<% end %>">
-			<img src="<%=media%>/brand.png" alt="OpenWrt">
+			<img src="<%=media%>/style/brand.webp" alt="OpenWrt">
 		</a>
 		<div class="status" id="indicators"></div>
 		<div class="logout" >  

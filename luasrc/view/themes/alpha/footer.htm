@@ -51,18 +51,9 @@ end)
 -- Calculate link width for responsive design
 local link_width = string.format("calc(100%% / %d)", num_links)
 
--- Retrieve theme properties
-local background_color = config.color or '#2222359a'
-local blur_value = tonumber(config.blur) or 20
-local link_blur = string.format("blur(%dpx)", blur_value)
 %>
 
 <style>
-.main > .main-left, .cbi-section, .cbi-section-error, #iptables, .Firewall form, #cbi-network > .cbi-section-node, #cbi-wireless > .cbi-section-node, #cbi-wireless > #wifi_assoclist_table, [data-tab-title], [data-page^="admin-system-admin"]:not(.node-main-login) .cbi-map:not(#cbi-dropbear), [data-page="admin-system-opkg"] #maincontent > .container, .tabs, .cbi-tabmenu, .cbi-tooltip {
-	background-color: <%=background_color%>;
-	backdrop-filter: <%=link_blur%>;
-	-webkit-backdrop-filter: <%=link_blur%>;
-}
 
 @media screen and (max-width: 720px) {
 	.navbar a {
